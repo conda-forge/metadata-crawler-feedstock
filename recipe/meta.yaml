@@ -42,7 +42,7 @@ requirements:
     - orjson
     - pyarrow
     - h5netcdf
-    - pydantic<2.12
+    - pydantic <2.12
     - rich
     - rich-argparse
     - tomli
@@ -62,7 +62,7 @@ test:
     - metadata-crawler --help
     - mdc --help
   requires:
-    - python >={{ python_min }}
+    - python {{ python_min }}
     - pip
 
 about:
