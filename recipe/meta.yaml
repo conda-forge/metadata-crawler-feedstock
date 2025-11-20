@@ -1,5 +1,5 @@
 {% set name = "metadata-crawler" %}
-{% set version = "2510.0.1" %}
+{% set version = "2510.0.2" %}
 {% set python_min = 3.11 %}
 
 package:
@@ -8,7 +8,7 @@ package:
 
 source:
   url: https://pypi.org/packages/source/{{ name[0] }}/{{ name }}/metadata_crawler-{{ version }}.tar.gz
-  sha256: 756dfb445facb051fcad2cf5c8ed64a53c746cd57b0e01258a6a379c35f8c91c
+  sha256: d04abe354cf229b0a5a60b2e23fb3ef6ba5669d9b7cba2cafed6254c16ab25ce
 
 build:
   entry_points:
@@ -42,7 +42,7 @@ requirements:
     - orjson
     - pyarrow
     - h5netcdf
-    - pydantic
+    - pydantic <2.12
     - rich
     - rich-argparse
     - tomli
@@ -62,6 +62,7 @@ test:
     - metadata-crawler --help
     - mdc --help
   requires:
+    - python {{ python_min }}
     - pip
 
 about:
