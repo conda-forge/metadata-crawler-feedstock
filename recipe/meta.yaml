@@ -1,5 +1,5 @@
 {% set name = "metadata-crawler" %}
-{% set version = "2510.0.2" %}
+{% set version = "2510.1.0" %}
 {% set python_min = 3.11 %}
 
 package:
@@ -8,7 +8,7 @@ package:
 
 source:
   url: https://pypi.org/packages/source/{{ name[0] }}/{{ name }}/metadata_crawler-{{ version }}.tar.gz
-  sha256: d04abe354cf229b0a5a60b2e23fb3ef6ba5669d9b7cba2cafed6254c16ab25ce
+  sha256: eeef35d763d26a3440fead2ee050b5c2796c5f2cc224c1c73cf4e0a03142212f
 
 build:
   entry_points:
