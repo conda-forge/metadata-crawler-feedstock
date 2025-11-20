@@ -62,6 +62,7 @@ test:
     - metadata-crawler --help
     - mdc --help
   requires:
+    - python >={{ python_min }}
     - pip
 
 about:
