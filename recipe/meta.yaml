@@ -20,10 +20,10 @@ build:
   skip: true  # [py<311]
 
 requirements:
-    build:
-      - {{ compiler('rust') }}
-      - {{ compiler('c') }}      # [unix]
-      - {{ stdlib('c') }}        # [unix]
+  build:
+    - {{ compiler('rust') }}
+    - {{ compiler('c') }}      # [unix]
+    - {{ stdlib('c') }}        # [unix]
 
   host:
     - python {{ python_min }}
