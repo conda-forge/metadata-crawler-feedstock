@@ -32,11 +32,11 @@ requirements:
     - ${{ compiler('rust') }}
     - cargo-bundle-licenses
   host:
-    - python
+    - python >=${{ python_min }}
     - pip
     - maturin >=1.10,<2.0
   run:
-    - python
+    - python >=${{ python_min }}
     - aiohttp
     - appdirs
     - ciso8601
