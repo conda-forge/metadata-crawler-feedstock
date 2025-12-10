@@ -18,14 +18,19 @@ build:
       - metadata-crawler = metadata_crawler.cli:cli
       - mdc = metadata_crawler.cli:cli
   script:
-    - python -m pip install . -vv --no-deps --no-build-isolation
+    env:
+      CARGO_PROFILE_RELEASE_STRIP: symbols
+      CARGO_PROFILE_RELEASE_LTO: fat
+    content:
+      - python -m pip install . -vv --no-deps --no-build-isolation
+      - cargo-bundle-licenses --format yaml --output ./THIRDPARTY.yml
 
 requirements:
   build:
     - ${{ stdlib('c') }}
     - ${{ compiler('c') }}
     - ${{ compiler('rust') }}
-
+    - cargo-bundle-licenses
   host:
     - python
     - pip
@@ -76,9 +81,10 @@ tests:
 about:
   summary: Crawl, extract and push climate metadata for indexing.
   homepage: https://github.com/freva-org/metadata-crawler
-  dev_url: https://github.com/freva-org/metadata-crawler
   license: BSD-3-Clause
-  license_file: LICENSE
+  license_file:
+    - LICENSE
+    - THIRDPARTY.yml
   description: |
     Harvest, normalise, and index climate / earth-system metadata from POSIX,
     S3/MinIO, and OpenStack Swift using configurable DRS dialects (CMIP6, CMIP5,
