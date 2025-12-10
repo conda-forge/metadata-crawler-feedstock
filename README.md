@@ -153,5 +153,5 @@ Feedstock Maintainers
 =====================
 
 * [@antarcticrainforest](https://github.com/antarcticrainforest/)
-* [@mo-dkrz.](https://github.com/mo-dkrz./)
+* [@mo-dkrz](https://github.com/mo-dkrz/)
 
