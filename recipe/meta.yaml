@@ -11,14 +11,20 @@ source:
   sha256: fe957db0cf397928fdbf29f79bafdff6d40fb868ebf76e8770295d5e1fbe1af1
 
 build:
+
   entry_points:
     - metadata-crawler = metadata_crawler.cli:cli
     - mdc = metadata_crawler.cli:cli
-  noarch: python
   script: {{ PYTHON }} -m pip install . -vv --no-deps --no-build-isolation
   number: 0
+  skip: true  # [py<311]
 
 requirements:
+    build:
+      - {{ compiler('rust') }}
+      - {{ compiler('c') }}      # [unix]
+      - {{ stdlib('c') }}        # [unix]
+
   host:
     - python {{ python_min }}
     - maturin >=1.10,<2.0
