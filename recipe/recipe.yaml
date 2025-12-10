@@ -53,7 +53,7 @@ requirements:
     - orjson
     - pyarrow
     - h5netcdf
-    - pydantic <2.12
+    - pydantic
     - rich
     - rich-argparse
     - tomli
