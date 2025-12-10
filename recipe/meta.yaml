@@ -1,5 +1,5 @@
 {% set name = "metadata-crawler" %}
-{% set version = "2510.1.0" %}
+{% set version = "2511.0.0" %}
 {% set python_min = 3.11 %}
 
 package:
@@ -8,7 +8,7 @@ package:
 
 source:
   url: https://pypi.org/packages/source/{{ name[0] }}/{{ name }}/metadata_crawler-{{ version }}.tar.gz
-  sha256: eeef35d763d26a3440fead2ee050b5c2796c5f2cc224c1c73cf4e0a03142212f
+  sha256: fe957db0cf397928fdbf29f79bafdff6d40fb868ebf76e8770295d5e1fbe1af1
 
 build:
   entry_points:
@@ -21,13 +21,12 @@ build:
 requirements:
   host:
     - python {{ python_min }}
-    - flit-core >=3.2
+    - maturin >=1.10,<2.0
     - pip
   run:
     - python >={{ python_min }}
     - aiohttp
     - appdirs
-    - anyio
     - ciso8601
     - fsspec
     - diskcache
@@ -80,5 +79,5 @@ about:
 
 extra:
   recipe-maintainers:
-    - mo-dkrz
     - antarcticrainforest
+    - mo-dkrz
