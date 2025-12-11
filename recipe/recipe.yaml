@@ -8,7 +8,7 @@ package:
   version: ${{ version }}
 
 source:
-  url: https://pypi.org/packages/source/${{ name[0] }}/${{ name }}/${{ name }}-${{ version }}.tar.gz
+  url: https://pypi.org/packages/source/${{ name[0] }}/${{ name }}/metadata_crawler-${{ version }}.tar.gz
   sha256: eeaf8feb6bfb8380aca6b7245365e6c723a27c70d99291c2f9a29ffc27dad75e
 
 build:
