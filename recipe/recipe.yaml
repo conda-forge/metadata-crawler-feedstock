@@ -12,7 +12,7 @@ source:
   sha256: eeaf8feb6bfb8380aca6b7245365e6c723a27c70d99291c2f9a29ffc27dad75e
 
 build:
-  number: 0
+  number: 1
   python:
     entry_points:
       - metadata-crawler = metadata_crawler.cli:cli
