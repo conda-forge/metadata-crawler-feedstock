@@ -62,8 +62,7 @@ requirements:
     - zarr
     - xarray
     - httpx
-    # - ${{ "uvloop" if not win }}
-     - uvloop
+    - uvloop
     - motor
 
 tests:
