@@ -1,6 +1,6 @@
 context:
   name: metadata-crawler
-  version: "2511.1.0"
+  version: "2511.1.2"
   python_min: "3.11"
 
 package:
@@ -9,7 +9,7 @@ package:
 
 source:
   url: https://pypi.org/packages/source/${{ name[0] }}/${{ name }}/metadata_crawler-${{ version }}.tar.gz
-  sha256: 2fe00b88980161db0204c6ed3c78af8b5177ad35a51b329a1815f21660e43574
+  sha256: eeaf8feb6bfb8380aca6b7245365e6c723a27c70d99291c2f9a29ffc27dad75e
 
 build:
   number: 0
@@ -62,7 +62,7 @@ requirements:
     - zarr
     - xarray
     - httpx
-    - uvloop
+    - ${{ "uvloop" if not win }}
     - motor
 
 tests:
