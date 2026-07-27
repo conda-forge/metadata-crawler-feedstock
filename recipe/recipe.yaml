@@ -1,18 +1,16 @@
 context:
   name: metadata-crawler
-  version: "2605.0.0"
-  python_min: "3.11"
-
+  version: "2511.2.2"
 package:
   name: ${{ name|lower }}
   version: ${{ version }}
-
 source:
   url: https://pypi.org/packages/source/${{ name[0] }}/${{ name }}/metadata_crawler-${{ version }}.tar.gz
-  sha256: 1a1ec9df862315b48361a6aacc0a3f4fa100a0ee3ce73ce166ce1e72b931d309
-
+  sha256: 68d24afee1342549e3c4b80db695ada85f56000d58ab4365e464299890ea4c4a
 build:
-  number: 0
+  number: 1
+  skip:
+    - match(python, "<3.11")
   python:
     entry_points:
       - metadata-crawler = metadata_crawler.cli:cli
@@ -24,7 +22,6 @@ build:
     content:
       - python -m pip install . -vv --no-deps --no-build-isolation
       - cargo-bundle-licenses --format yaml --output ./THIRDPARTY.yml
-
 requirements:
   build:
     - ${{ stdlib('c') }}
@@ -48,25 +45,22 @@ requirements:
     - intake-xarray
     - intake-esm
     - pandas
-    - pymongo
     - python-dateutil
     - numpy
     - orjson
     - pyarrow
     - h5netcdf
     - pydantic
-    - psycopg
     - rich
     - rich-argparse
     - rtoml
-    - sqlalchemy
     - tomlkit
     - typing_extensions
     - zarr
     - xarray
     - httpx
     - ${{ "uvloop" if not win }}
-
+    - motor
 tests:
   - python:
       imports:
@@ -79,7 +73,6 @@ tests:
       run:
         - python
         - pip
-
 about:
   summary: Crawl, extract and push climate metadata for indexing.
   homepage: https://github.com/freva-org/metadata-crawler
@@ -93,7 +86,6 @@ about:
     CORDEX, …). Output to a temporary catalogue (JSONLines) and then index into
     systems such as Solr or MongoDB. Configuration is TOML with inheritance,
     templating, and computed rules.
-
 extra:
   recipe-maintainers:
     - antarcticrainforest
