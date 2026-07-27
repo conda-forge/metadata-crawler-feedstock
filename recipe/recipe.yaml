@@ -6,13 +6,14 @@ context:
 package:
   name: ${{ name|lower }}
   version: ${{ version }}
-
 source:
   url: https://pypi.org/packages/source/${{ name[0] }}/${{ name }}/metadata_crawler-${{ version }}.tar.gz
   sha256: 5112461776b405ad0897a4625971f05f3d6d5a6e1e3b3c786d51bb202e0db4cd
 
 build:
-  number: 0
+  number: 1
+  skip:
+    - match(python, "<3.11")
   python:
     entry_points:
       - metadata-crawler = metadata_crawler.cli:cli
@@ -24,7 +25,6 @@ build:
     content:
       - python -m pip install . -vv --no-deps --no-build-isolation
       - cargo-bundle-licenses --format yaml --output ./THIRDPARTY.yml
-
 requirements:
   build:
     - ${{ stdlib('c') }}
@@ -48,25 +48,22 @@ requirements:
     - intake-xarray
     - intake-esm
     - pandas
-    - pymongo
     - python-dateutil
     - numpy
     - orjson
     - pyarrow
     - h5netcdf
     - pydantic
-    - psycopg
     - rich
     - rich-argparse
     - rtoml
-    - sqlalchemy
     - tomlkit
     - typing_extensions
     - zarr
     - xarray
     - httpx
     - ${{ "uvloop" if not win }}
-
+    - motor
 tests:
   - python:
       imports:
@@ -79,7 +76,6 @@ tests:
       run:
         - python
         - pip
-
 about:
   summary: Crawl, extract and push climate metadata for indexing.
   homepage: https://github.com/freva-org/metadata-crawler
@@ -93,7 +89,6 @@ about:
     CORDEX, …). Output to a temporary catalogue (JSONLines) and then index into
     systems such as Solr or MongoDB. Configuration is TOML with inheritance,
     templating, and computed rules.
-
 extra:
   recipe-maintainers:
     - antarcticrainforest
