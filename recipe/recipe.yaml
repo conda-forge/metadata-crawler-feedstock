@@ -1,12 +1,12 @@
 context:
   name: metadata-crawler
-  version: "2511.2.2"
+  version: "2607.1.0"
 package:
   name: ${{ name|lower }}
   version: ${{ version }}
 source:
   url: https://pypi.org/packages/source/${{ name[0] }}/${{ name }}/metadata_crawler-${{ version }}.tar.gz
-  sha256: 68d24afee1342549e3c4b80db695ada85f56000d58ab4365e464299890ea4c4a
+  sha256: 5112461776b405ad0897a4625971f05f3d6d5a6e1e3b3c786d51bb202e0db4cd
 build:
   number: 2
   skip:
