@@ -1,42 +1,37 @@
+schema_version: 1
+
 context:
-  name: metadata-crawler
-  version: "2511.2.2"
+  version: "2610.0.0"
+  build_number: "0"
+
 package:
-  name: ${{ name|lower }}
+  name: metadata-crawler
   version: ${{ version }}
+
 source:
-  url: https://pypi.org/packages/source/${{ name[0] }}/${{ name }}/metadata_crawler-${{ version }}.tar.gz
-  sha256: 68d24afee1342549e3c4b80db695ada85f56000d58ab4365e464299890ea4c4a
+  url: https://files.pythonhosted.org/packages/source/m/metadata-crawler/metadata_crawler-${{ version }}.tar.gz
+  sha256: b8215ae2e5140d1d16fac5142274e1c695391785cfd28c6e659eeba452260670
+
 build:
-  number: 2
+  number: ${{ build_number }}
   skip:
     - match(python, "<3.11")
   python:
     entry_points:
-      - metadata-crawler = metadata_crawler.cli:cli
       - mdc = metadata_crawler.cli:cli
-  script:
-    env:
-      CARGO_PROFILE_RELEASE_STRIP: symbols
-      CARGO_PROFILE_RELEASE_LTO: fat
-    content:
-      - python -m pip install . -vv --no-deps --no-build-isolation
-      - cargo-bundle-licenses --format yaml --output ./THIRDPARTY.yml
+      - metadata-crawler = metadata_crawler.cli:cli
+
 requirements:
-  build:
-    - ${{ stdlib('c') }}
-    - ${{ compiler('c') }}
-    - ${{ compiler('rust') }}
-    - cargo-bundle-licenses
   host:
-    - python
-    - pip
+    - python >=3.11
     - maturin >=1.10,<2.0
+    - pip
   run:
-    - python
+    - python >=3.11
+    - rich-argparse
     - aiohttp
-    - appdirs
     - ciso8601
+    - cryptography
     - fsspec
     - diskcache
     - s3fs
@@ -46,48 +41,45 @@ requirements:
     - intake-esm
     - pandas
     - python-dateutil
-    - psycopg
+    - platformdirs
+    - psycopg [binary]
     - numpy
     - orjson
     - pyarrow
+    - pymongo
     - h5netcdf
+    - h5py
+    - pyrage
     - pydantic
+    - pyarrow
     - rich
-    - rich-argparse
     - rtoml
     - sqlalchemy
     - tomlkit
-    - typing_extensions
+    - typing-extensions
     - zarr
     - xarray
-    - httpx
     - ${{ "uvloop" if not win }}
-    - motor
+    - httpx
+
 tests:
   - python:
       imports:
         - metadata_crawler
-  - script:
-      - pip check
-      - metadata-crawler --help
-      - mdc --help
-    requirements:
-      run:
-        - python
-        - pip
+      pip_check: true
+
 about:
   summary: Crawl, extract and push climate metadata for indexing.
-  homepage: https://github.com/freva-org/metadata-crawler
-  license: BSD-3-Clause
-  license_file:
-    - LICENSE
-    - THIRDPARTY.yml
   description: |
     Harvest, normalise, and index climate / earth-system metadata from POSIX,
     S3/MinIO, and OpenStack Swift using configurable DRS dialects (CMIP6, CMIP5,
-    CORDEX, …). Output to a temporary catalogue (JSONLines) and then index into
-    systems such as Solr or MongoDB. Configuration is TOML with inheritance,
-    templating, and computed rules.
+    CORDEX, …). Output to a temporary source of truth (JSONLines, PostgresDB)
+    and then index into systems such as Solr or MongoDB. Configuration is TOML
+    with inheritance, templating, and computed rules.
+  license: BSD-3-Clause
+  license_file:
+    - LICENSE
+  documentation: https://metadata-crawler.readthedocs.io
 extra:
   recipe-maintainers:
     - antarcticrainforest
